@@ -1,5 +1,5 @@
 import json
-import boto3 # pyright: ignore[reportMissingImports]
+import boto3
 from datetime import datetime, timedelta
 
 cloudwatch = boto3.client('cloudwatch')
