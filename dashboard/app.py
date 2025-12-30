@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-import boto3 # pyright: ignore[reportMissingImports]
+import boto3
 import json
 from datetime import datetime
 
