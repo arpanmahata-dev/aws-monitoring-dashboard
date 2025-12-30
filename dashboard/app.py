@@ -1,0 +1,46 @@
+from flask import Flask, render_template
+import boto3
+import json
+from datetime import datetime
+
+app = Flask(__name__)
+s3 = boto3.client('s3')
+
+BUCKET_NAME = 'your-monitoring-bucket'
+
+@app.route('/')
+def dashboard():
+    # Get latest metrics from S3
+    response = s3.list_objects_v2(
+        Bucket=BUCKET_NAME,
+        Prefix='metrics/',
+        MaxKeys=1
+    )
+    
+    if 'Contents' in response:
+        latest_key = response['Contents'][0]['Key']
+        obj = s3.get_object(Bucket=BUCKET_NAME, Key=latest_key)
+        metrics = json.loads(obj['Body'].read())
+    else:
+        metrics = {}
+    
+    return render_template('dashboard.html', metrics=metrics)
+
+@app.route('/api/metrics')
+def api_metrics():
+    response = s3.list_objects_v2(
+        Bucket=BUCKET_NAME,
+        Prefix='metrics/',
+        MaxKeys=24
+    )
+    
+    metrics_list = []
+    if 'Contents' in response:
+        for obj in response['Contents']:
+            data = s3.get_object(Bucket=BUCKET_NAME, Key=obj['Key'])
+            metrics_list.append(json.loads(data['Body'].read()))
+    
+    return {'metrics': metrics_list}
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
