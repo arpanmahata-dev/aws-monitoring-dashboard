@@ -215,11 +215,6 @@ Take these screenshots:
 6. **Terraform apply output** - Show successful deployment
 
 ---
-
-## 🎯 Next Steps for Resume
-
-Add this to your resume:
-````
 AWS Infrastructure Monitoring Dashboard
 - Developed automated monitoring system using AWS Lambda, S3, and CloudWatch
 - Implemented serverless architecture collecting metrics every 15 minutes
