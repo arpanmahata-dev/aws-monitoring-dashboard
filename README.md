@@ -113,13 +113,9 @@ Built as part of DevOps learning journey to demonstrate:
 ⭐ If you found this project helpful, please give it a star!
 ````
 
-**Save the file**
+Push to GitHub (15 minutes)
 
----
-
-## 🎯 PHASE 13: Push to GitHub (15 minutes)
-
-### Step 26: Initialize Git Repository
+Initialize Git Repository
 ````bash
 # Navigate to project root
 cd C:\Users\cptc0$MIC\Desktop\DevOps-Projects\aws-monitoring-dashboard
@@ -168,7 +164,7 @@ response.json
 .env
 ````
 
-### Step 27: Commit and Push
+### : Commit and Push
 ````bash
 # Add all files
 git add .
