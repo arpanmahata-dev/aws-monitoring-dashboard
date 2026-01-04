@@ -113,13 +113,9 @@ Built as part of DevOps learning journey to demonstrate:
 ⭐ If you found this project helpful, please give it a star!
 ````
 
-**Save the file**
+Push to GitHub (15 minutes)
 
----
-
-## 🎯 PHASE 13: Push to GitHub (15 minutes)
-
-### Step 26: Initialize Git Repository
+Initialize Git Repository
 ````bash
 # Navigate to project root
 cd C:\Users\cptc0$MIC\Desktop\DevOps-Projects\aws-monitoring-dashboard
@@ -168,7 +164,7 @@ response.json
 .env
 ````
 
-### Step 27: Commit and Push
+### : Commit and Push
 ````bash
 # Add all files
 git add .
@@ -211,19 +207,31 @@ Mark these as you complete them:
 
 Take these screenshots:
 
-1. **Dashboard homepage** - Show all metrics
-2. **Chart with data** - After collecting multiple points
-3. **AWS Lambda console** - Show successful executions
-4. **S3 bucket** - Show metrics files
-5. **EventBridge rule** - Show schedule
-6. **Terraform apply output** - Show successful deployment
+1. **Dashboard homepage**
+   <img width="1893" height="648" alt="image" src="https://github.com/user-attachments/assets/f1d5f23c-e103-432d-8e9e-1e25acdfa56d" />
+   
+2. **Chart with data**
+   <img width="1841" height="845" alt="image" src="https://github.com/user-attachments/assets/d77af067-b0c8-4a99-94c4-02f4807f7051" />
+   
+3. **AWS Lambda console**
+<img width="1884" height="611" alt="image" src="https://github.com/user-attachments/assets/560b7147-6ae4-4719-8c39-fd5c883fe83c" />
+
+   
+4. **S3 bucket** 
+<img width="1885" height="724" alt="image" src="https://github.com/user-attachments/assets/0d2d0e1d-3a87-4af8-afe7-9bffa5056200" />
+
+5. **EventBridge rule** 
+<img width="1449" height="674" alt="image" src="https://github.com/user-attachments/assets/89674f39-7c19-48b8-b157-7d722bc10b99" />
+<img width="993" height="685" alt="image" src="https://github.com/user-attachments/assets/7649ad5b-dec4-4532-8d65-5db14f553342" />
+<img width="913" height="620" alt="image" src="https://github.com/user-attachments/assets/a6efd216-e0b4-4fac-9784-9bb739c4f160" />
+<img width="901" height="895" alt="image" src="https://github.com/user-attachments/assets/52acac92-03b2-4a60-93e1-e1ab88e85b25" />
+<img width="859" height="788" alt="image" src="https://github.com/user-attachments/assets/cd0ce42a-169b-4ddb-89cf-cb28251b0fec" />
+
+6. **Terraform apply output**
+  <img width="1235" height="468" alt="image" src="https://github.com/user-attachments/assets/dc22c24e-3317-453f-b306-bc83e3e81cc1" />
+
 
 ---
-
-## 🎯 Next Steps for Resume
-
-Add this to your resume:
-````
 AWS Infrastructure Monitoring Dashboard
 - Developed automated monitoring system using AWS Lambda, S3, and CloudWatch
 - Implemented serverless architecture collecting metrics every 15 minutes
@@ -277,7 +285,7 @@ If you're stuck at any step:
 
 🎊 **CONGRATULATIONS!** 
 
-You've successfully built and deployed an AWS Monitoring Dashboard! This project demonstrates:
+This project demonstrates:
 
 - ✅ AWS Lambda (Serverless)
 - ✅ Infrastructure as Code (Terraform)
@@ -285,10 +293,6 @@ You've successfully built and deployed an AWS Monitoring Dashboard! This project
 - ✅ Cloud Architecture Design
 - ✅ Automation & Scheduling
 
-This is a **strong portfolio project** that shows real DevOps skills!
-
 ---
-
-Would you like me to help you with any specific step, or shall we move on to deploying this to an EC2 instance for 24/7 availability?
 
 
