@@ -63,28 +63,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔍 AWS Infrastructure Monitor</h1>
-        
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <h3>📊 EC2 Instances</h3>
-                <div class="metric-value">{{ metrics.ec2_instances.running if metrics.ec2_instances else 0 }}</div>
-                <div class="metric-label">Running / {{ metrics.ec2_instances.total if metrics.ec2_instances else 0 }} Total</div>
-            </div>
-            
-            <div class="metric-card">
-                <h3>🪣 S3 Buckets</h3>
-                <div class="metric-value">{{ metrics.s3_buckets.total if metrics.s3_buckets else 0 }}</div>
-                <div class="metric-label">Active Buckets</div>
-            </div>
-            
-            <div class="metric-card">
-                <h3>💰 Estimated Charges</h3>
-                <div class="metric-value">${{ "%.2f"|format(metrics.billing.estimated_charges if metrics.billing else 0) }}</div>
-                <div class="metric-label">Current Month</div>
-            </div>
-        </div>
+    
         
         <div class="chart-container">
             <canvas id="metricsChart"></canvas>
