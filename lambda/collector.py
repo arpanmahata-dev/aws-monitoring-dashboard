@@ -16,7 +16,7 @@ def lambda_handler(event, context):
     
     # Store in S3
     s3.put_object(
-        Bucket='your-monitoring-bucket',
+        Bucket='aws-monitoring-metrics-82e9d6ef',
         Key=f'metrics/{datetime.now().strftime("%Y-%m-%d-%H-%M")}.json',
         Body=json.dumps(metrics)
     )
