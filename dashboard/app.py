@@ -6,7 +6,7 @@ from datetime import datetime
 app = Flask(__name__)
 s3 = boto3.client('s3')
 
-BUCKET_NAME = 'your-monitoring-bucket'
+BUCKET_NAME = '${aws_s3_bucket.metrics_bucket.id}'
 
 @app.route('/')
 def dashboard():
