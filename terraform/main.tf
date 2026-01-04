@@ -68,16 +68,24 @@ resource "aws_iam_role_policy" "lambda_policy" {
 # Lambda Function
 resource "aws_lambda_function" "metrics_collector" {
   filename         = "lambda_function.zip"
-  function_name    = "metrics_collector"
+  function_name    = "aws_metrics_collector"
   role            = aws_iam_role.lambda_role.arn
   handler         = "collector.lambda_handler"
   runtime         = "python3.11"
   timeout         = 60
+  memory_size     = 256
+  
+  source_code_hash = filebase64sha256("lambda_function.zip")  # ADD THIS LINE
 
   environment {
     variables = {
       BUCKET_NAME = aws_s3_bucket.metrics_bucket.id
     }
+  }
+
+  tags = {
+    Name    = "Metrics Collector Lambda"
+    Project = "AWS-Monitoring-Dashboard"
   }
 }
 
