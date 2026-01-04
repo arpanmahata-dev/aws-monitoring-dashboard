@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AWS Monitoring Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .metric-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .metric-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .metric-value {
+            font-size: 3em;
+            font-weight: bold;
+            color: #333;
+        }
+        .metric-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .chart-container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .timestamp {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 AWS Infrastructure Monitor</h1>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>📊 EC2 Instances</h3>
+                <div class="metric-value">{{ metrics.ec2_instances.running if metrics.ec2_instances else 0 }}</div>
+                <div class="metric-label">Running / {{ metrics.ec2_instances.total if metrics.ec2_instances else 0 }} Total</div>
+            </div>
+            
+            <div class="metric-card">
+                <h3>🪣 S3 Buckets</h3>
+                <div class="metric-value">{{ metrics.s3_buckets.total if metrics.s3_buckets else 0 }}</div>
+                <div class="metric-label">Active Buckets</div>
+            </div>
+            
+            <div class="metric-card">
+                <h3>💰 Estimated Charges</h3>
+                <div class="metric-value">${{ "%.2f"|format(metrics.billing.estimated_charges if metrics.billing else 0) }}</div>
+                <div class="metric-label">Current Month</div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="metricsChart"></canvas>
+        </div>
+        
+        <div class="timestamp">
+            Last Updated: {{ metrics.timestamp if metrics.timestamp else 'Never' }}
+        </div>
+    </div>
+    
+    <script>
+        // Fetch historical data and create chart
+        fetch('/api/metrics')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('metricsChart').getContext('2d');
+                const labels = data.metrics.map(m => new Date(m.timestamp).toLocaleTimeString());
+                const ec2Data = data.metrics.map(m => m.ec2_instances.running);
+                
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Running EC2 Instances',
+                            data: ec2Data,
+                            borderColor: '#667eea',
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Instance Count Over Time'
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+</body>
+</html>
