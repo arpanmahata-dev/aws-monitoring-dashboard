@@ -27,13 +27,7 @@ def dashboard():
 def api_metrics():
     """API endpoint for metrics data"""
     try:
-        # Get all metrics files (last 24 hours)
-        response = s3.list_objects_v2(
-            Bucket=BUCKET_NAME,
-            Prefix='metrics/',
-            MaxKeys=100
-        )
-        
+
         metrics_list = []
         
         if 'Contents' in response:
