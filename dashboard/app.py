@@ -6,6 +6,9 @@ import os
 
 app = Flask(__name__)
 
+# AWS Configuration
+AWS_REGION = 'ap-south-1'
+BUCKET_NAME = os.environ.get('BUCKET_NAME', 'aws-monitoring-metrics-82e9d6ef')  # Use your bucket name from Terraform output
 
 # Initialize AWS clients
 s3 = boto3.client('s3', region_name=AWS_REGION)
