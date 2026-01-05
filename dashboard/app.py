@@ -99,7 +99,20 @@ def get_latest_metrics():
         # Get the most recent file
         latest_obj = max(response['Contents'], key=lambda x: x['LastModified'])
         
-
+        # Read the file content
+        obj_data = s3.get_object(Bucket=BUCKET_NAME, Key=latest_obj['Key'])
+        metrics = json.loads(obj_data['Body'].read())
+        
+        return metrics
+        
+    except Exception as e:
+        print(f"Error getting latest metrics: {str(e)}")
+        return {
+            'timestamp': datetime.now().isoformat(),
+            'ec2_instances': {'total': 0, 'running': 0, 'stopped': 0},
+            's3_buckets': {'total': 0},
+            'billing': {'estimated_charges': 0.0}
+        }
 
 @app.route('/health')
 def health():
