@@ -40,7 +40,22 @@ def api_metrics():
         if 'Contents' in response:
             # Sort by last modified (newest first)
             objects = sorted(response['Contents'], key=lambda x: x['LastModified'], reverse=True)
-            
+            # Get up to 24 most recent files (one per hour)
+            for obj in objects[:24]:
+                try:
+                    data = s3.get_object(Bucket=BUCKET_NAME, Key=obj['Key'])
+                    metrics = json.loads(data['Body'].read())
+                    metrics_list.append(metrics)
+                except Exception as e:
+                    print(f"Error reading {obj['Key']}: {str(e)}")
+                    continue
+        
+        return jsonify({
+            'success': True,
+            'count': len(metrics_list),
+            'metrics': metrics_list
+        })
+        
 
     except Exception as e:
         print(f"Error in API: {str(e)}")
