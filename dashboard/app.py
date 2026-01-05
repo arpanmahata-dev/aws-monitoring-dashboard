@@ -79,22 +79,7 @@ def api_latest():
             'error': str(e)
         }), 500
 
-def get_latest_metrics():
-    """Retrieve the most recent metrics from S3"""
-    try:
-        response = s3.list_objects_v2(
-            Bucket=BUCKET_NAME,
-            Prefix='metrics/',
-            MaxKeys=1
-        )
-        
-        if 'Contents' not in response or len(response['Contents']) == 0:
-            return {
-                'timestamp': datetime.now().isoformat(),
-                'ec2_instances': {'total': 0, 'running': 0, 'stopped': 0},
-                's3_buckets': {'total': 0},
-                'billing': {'estimated_charges': 0.0}
-            }
+
         
         # Get the most recent file
         latest_obj = max(response['Contents'], key=lambda x: x['LastModified'])
